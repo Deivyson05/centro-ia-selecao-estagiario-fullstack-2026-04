@@ -1,5 +1,5 @@
-from repository.prestador_repository import PrestadorRepository
-from schemas.prestador_schema import PrestadorCreate, PrestadorResponse
+from api.repository.prestador_repository import PrestadorRepository
+from api.schemas.prestador_schema import PrestadorCreate, PrestadorResponse
 
 class PrestadorService:
     def __init__(self, repository: PrestadorRepository):

@@ -1,4 +1,4 @@
-from services.chat_service import ChatService
+from api.services.chat_service import ChatService
 from fastapi import HTTPException, status
 
 class ChatController:

@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
-from models.prestador import Prestador
-from schemas.prestador_schema import PrestadorCreate
+from api.models.prestador import Prestador
+from api.schemas.prestador_schema import PrestadorCreate
 
 class PrestadorRepository:
     def __init__(self, db: Session):

@@ -1,10 +1,10 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-from database import get_db
-from controllers.prestador_controller import PrestadorController
-from services.prestador_service import PrestadorService
-from repository.prestador_repository import PrestadorRepository
-from schemas.prestador_schema import PrestadorCreate, PrestadorResponse
+from api.database import get_db
+from api.controllers.prestador_controller import PrestadorController
+from api.services.prestador_service import PrestadorService
+from api.repository.prestador_repository import PrestadorRepository
+from api.schemas.prestador_schema import PrestadorCreate, PrestadorResponse
 
 router = APIRouter(prefix="/prestadores", tags=["Prestadores"])
 

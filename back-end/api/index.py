@@ -1,7 +1,7 @@
 from fastapi import FastAPI
-from routers import chat_router, prestador_router
-from database import engine, Base
-from models import prestador
+from api.routers import chat_router, prestador_router
+from api.database import engine, Base
+from api.models import prestador
 
 Base.metadata.create_all(bind=engine)
 

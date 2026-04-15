@@ -1,13 +1,13 @@
 from anthropic import Anthropic
 from groq import Groq
-from settings import settings
+from api.settings import settings
 import chromadb
 from chromadb.utils.embedding_functions import SentenceTransformerEmbeddingFunction
 from pypdf import PdfReader
 from pathlib import Path
 
 class ChatService:
-    def __init__(self, docs_folder: str = "./docs"):
+    def __init__(self, docs_folder: str = "./api/docs"):
         self.client = Groq(api_key=settings.llm_api_key)
         self.history = []
         self.vectorstore = self._build_index(docs_folder)
