@@ -14,4 +14,6 @@ def read_root():
 app.include_router(chat_router.router)
 app.include_router(prestador_router.router)
 
+def handler(request, context):
+    return app
 #uvicorn main:app --reload
