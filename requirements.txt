@@ -1,0 +1,11 @@
+fastapi
+pydantic-settings
+sqlalchemy
+pydantic
+anthropic
+groq
+chromadb
+pypdf
+pathlib
+sentence-transformers
+psycopg2
