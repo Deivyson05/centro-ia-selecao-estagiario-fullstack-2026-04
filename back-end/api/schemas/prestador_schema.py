@@ -5,6 +5,7 @@ class PrestadorCreate(BaseModel):
     email: str
     telefone: str
     endereco: str
+    servico: str
 
 class PrestadorResponse(BaseModel):
     id: int
@@ -12,6 +13,7 @@ class PrestadorResponse(BaseModel):
     email: str
     telefone: str
     endereco: str
+    servico: str
 
     class Config:
         from_attributes = True

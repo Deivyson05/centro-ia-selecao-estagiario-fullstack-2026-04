@@ -9,3 +9,4 @@ class Prestador(Base):
     email = Column(String, unique=True, nullable=False)
     telefone = Column(String, nullable=False)
     endereco = Column(String, nullable=False)
+    servico = Column(String, nullable=False)
