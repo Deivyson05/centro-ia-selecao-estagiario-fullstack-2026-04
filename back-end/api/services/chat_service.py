@@ -17,7 +17,6 @@ class ChatService:
         self.prestador_service = prestador_service
         self.horario_marcado_service = horario_marcado_service
         self.histories = {}
-        self.bimbimbambam = "bimbimbambam"
         self.vectorstore = self._build_index(docs_folder)
         
     def _carregar_servicos(self) -> str:
