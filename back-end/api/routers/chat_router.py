@@ -1,13 +1,26 @@
-from fastapi import APIRouter
-from pydantic import BaseModel
+from fastapi import APIRouter, Depends
+from sqlalchemy.orm import Session
+from api.database import get_db, SessionLocal
 from api.services.chat_service import ChatService
 from api.controllers.chat_controller import ChatController
+from api.schemas.chat_schema import ChatRequest
+from api.services.prestador_service import PrestadorService
+from api.services.horario_marcado_service import HorarioMarcadoService
+from api.repository.prestador_repository import PrestadorRepository
+from api.repository.horario_marcado_repository import HorarioMarcadoRepository
 
 router = APIRouter(prefix="/chat", tags=["chat"])
-controller = ChatController(service=ChatService())
 
-class ChatRequest(BaseModel):
-    message: str
+# cria uma sessão dedicada pro chat service
+_db = SessionLocal()
+_chat_service = ChatService(
+    prestador_service=PrestadorService(PrestadorRepository(_db)),
+    horario_marcado_service=HorarioMarcadoService(HorarioMarcadoRepository(_db))
+)
+
 @router.post("/")
 def chat(req: ChatRequest):
-    return {"message": controller.chat(req.message)}
+    ctrl = ChatController(_chat_service)
+    # atualiza o db a cada request
+    _db.expire_all()
+    return {"message": ctrl.chat(req.message, req.session_id)}

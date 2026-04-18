@@ -7,6 +7,7 @@ class HorarioMarcadoRepository:
         self.db = db
 
     def create(self, data: HorarioMarcadoCreate) -> HorarioMarcado:
+        print(f"Creating HorarioMarcado with data: {data}")
         horario_marcado = HorarioMarcado(**data.model_dump())
         self.db.add(horario_marcado)
         self.db.commit()
@@ -26,3 +27,7 @@ class HorarioMarcadoRepository:
     def delete(self, horario_marcado: HorarioMarcado) -> None:
         self.db.delete(horario_marcado)
         self.db.commit()
+
+    def get_horarios_ocupados_by_prestador_e_data(self, prestador_id: int, data: str) -> list[HorarioMarcado]:
+        print(prestador_id, data)
+        return self.db.query(HorarioMarcado).filter(HorarioMarcado.prestador_id == prestador_id, HorarioMarcado.data_hora == data).all()

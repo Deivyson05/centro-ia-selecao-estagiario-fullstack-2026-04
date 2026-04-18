@@ -4,8 +4,8 @@ const api = axios.create({
     baseURL: "http://localhost:8000",
 });
 
-export function sendMessage(message: string) {
-    return api.post("/chat/", { message: message });
+export function sendMessage(message: string, sessionId: string) {
+    return api.post("/chat/", { message: message, session_id: sessionId });
 }
 
 export function getHorarios() {

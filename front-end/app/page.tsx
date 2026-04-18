@@ -12,7 +12,6 @@ import Image from "next/image";
 export default function Home() {
   return (
     <main className="flex flex-col bg-background">
-      <Header/>
       <HomeSection/>
       <AboutSection/>
       <ServicesSection/>

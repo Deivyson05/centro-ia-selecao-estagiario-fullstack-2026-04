@@ -1,12 +1,12 @@
 from fastapi import FastAPI
-from api.routers import chat_router, prestador_router
+from api.routers import chat_router, prestador_router, horario_marcado_router
 from api.database import engine, Base
-from api.models import prestador
+from api.models import prestador, horario_marcado
 from fastapi.middleware.cors import CORSMiddleware
 
-Base.metadata.create_all(bind=engine)
-
 app = FastAPI()
+
+Base.metadata.create_all(bind=engine)
 
 app.add_middleware(
     CORSMiddleware,
@@ -22,6 +22,7 @@ def read_root():
 
 app.include_router(chat_router.router)
 app.include_router(prestador_router.router)
+app.include_router(horario_marcado_router.router)
 
 def handler(request, context):
     return app

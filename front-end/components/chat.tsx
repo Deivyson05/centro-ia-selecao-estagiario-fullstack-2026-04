@@ -26,15 +26,18 @@ export function ChatCard() {
             conversaGlobal.push({ dono: "user", message: message, time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) });
             setLS('conversa', conversaGlobal);
             setMessage("");
-            const response = await sendMessage(message);
+            let sessionId = getLS('sessionId');
+            if (!sessionId) {
+                sessionId = Math.random().toString(36).substring(2);
+                setLS('sessionId', sessionId);
+            }
+            const response = await sendMessage(message, sessionId);
             console.log(response.data);
             if (response.status === 200) {
-                if (getLS('conversa')) {
-                    conversaGlobal.push({ dono: "assistant", message: response.data.message, time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) });
-                    setLS('conversa', conversaGlobal);
-                } else {
-                    setLS('conversa', [{ message: response.data.message, time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }]);
-                }
+                const newMessage = { dono: "assistant", message: response.data.message, time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) };
+                setConversaGlobal((prevConversa: any[]) => [...prevConversa, newMessage]);
+                setMessage("");
+                setLS('conversa', conversaGlobal);
             }
         } catch (error) {
             console.error("Erro ao enviar mensagem:", error);
@@ -42,8 +45,8 @@ export function ChatCard() {
     }
     return (
         <Dialog>
-            <DialogTrigger className="fixed bottom-4 right-4 bg-primary text-white rounded-full p-4 shadow-lg hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
-                Chat
+            <DialogTrigger className="fixed bottom-4 right-4 bg-primary text-white rounded-full p-4 shadow-lg hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 cursor-pointer">
+                Assistente Virtual
             </DialogTrigger>
             <DialogContent>
                 <DialogHeader>
@@ -63,12 +66,7 @@ export function ChatCard() {
                             </div>
                         ))
                     }
-                    {/* <div className="flex flex-col items-end space-x-4">
-                        <span className="text-end">{dateTime}</span>
-                        <div className="bg-blue-500 text-white rounded-lg p-3 max-w-xs">
-                            Resposta
-                        </div>
-                    </div> */}
+
                 </div>
                 <div className="flex items-center justify-between rounded-xl overflow-hidden border border-gray-300">
                     <input type="text" placeholder="Mensagem..." className="flex-1 p-2" 

@@ -11,3 +11,5 @@ class HorarioMarcado(Base):
     cliente_email = Column(String, nullable=False)
     cliente_telefone = Column(String, nullable=False)
     data_hora = Column(DateTime, nullable=False)
+
+    prestador = relationship("Prestador")

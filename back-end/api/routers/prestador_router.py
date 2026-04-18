@@ -16,3 +16,7 @@ def get_controller(db: Session = Depends(get_db)) -> PrestadorController:
 @router.post("/", response_model=PrestadorResponse, status_code=201)
 def create_prestador(data: PrestadorCreate, ctrl: PrestadorController = Depends(get_controller)):
     return ctrl.create(data)
+
+@router.get("/", response_model=list[PrestadorResponse])
+def get_all(ctrl: PrestadorController = Depends(get_controller)):
+    return ctrl.get_all()

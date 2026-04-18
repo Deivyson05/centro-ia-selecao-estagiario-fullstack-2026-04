@@ -18,7 +18,7 @@ def create_horario_marcado(data: HorarioMarcadoCreate, ctrl: HorarioMarcadoContr
     return ctrl.create(data)
 
 @router.get("/", response_model=list[HorarioMarcadoResponse])
-def get_all_horarios_marcados(ctrl: HorarioMarcadoController = Depends(get_controller)):
+def get_all(ctrl: HorarioMarcadoController = Depends(get_controller)):
     return ctrl.get_all()
 
 @router.put("/", response_model=HorarioMarcadoResponse)
