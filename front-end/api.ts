@@ -9,15 +9,15 @@ export function sendMessage(message: string, sessionId: string) {
 }
 
 export function getHorarios() {
-    return api.get("/horarios_marcados");
+    return api.get("/horarios_marcados/");
 }
 
 export function getPrestadores() {
-    return api.get("/prestadores");
+    return api.get("/prestadores/");
 }
 
 export function createPrestador(data: any) {
-    return api.post("/prestadores", data);
+    return api.post("/prestadores/", data);
 }
 
 export function editPrestador(id: number, data: any) {
