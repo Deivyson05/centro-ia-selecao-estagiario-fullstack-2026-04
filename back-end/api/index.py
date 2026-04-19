@@ -10,9 +10,9 @@ Base.metadata.create_all(bind=engine)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],  # endereço do seu front
-    allow_credentials=True,
-    allow_methods=["*"],  # ou ["GET", "POST", "PUT", "DELETE"]
+    allow_origins=["*"],
+    allow_credentials=False,
+    allow_methods=["*"],
     allow_headers=["*"],
 )
 
